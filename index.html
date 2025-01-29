@@ -2,51 +2,42 @@
 <html lang="fa" dir="rtl"> <!-- اضافه کردن dir="rtl" برای راست‌چین کردن صفحه -->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="سیستم عامل تحت وب HM با امکانات منحصر به فرد، مدیریت فایل‌ها، پردازش‌های موازی، ذخیره‌سازی ابری و بیشتر.">
-    <meta name="keywords" content="سیستم‌عامل، تحت وب، HM، سیستم‌عامل تحت وب، ذخیره‌سازی ابری، پردازش موازی">
-    <meta name="author" content="نام شما یا برند">
-    <meta property="og:title" content="سیستم‌عامل تحت وب HM">
-    <meta property="og:description" content="سیستم عامل تحت وب HM با امکانات منحصر به فرد، مدیریت فایل‌ها، پردازش‌های موازی، ذخیره‌سازی ابری و بیشتر.">
-    <meta property="og:image" content="آدرس تصویر پیش‌نمایش">
-    <meta property="og:url" content="آدرس سایت شما">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="سیستم‌عامل تحت وب HM | مدیریت فایل‌ها، اجرای برنامه‌های وب، ذخیره‌سازی ابری">
     <meta name="robots" content="index, follow">
     <title>سیستم‌عامل تحت وب HM</title>
-
-    <!-- لینک به فایل‌های CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- فونت‌های گوگل -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
-
 <body>
-    <header>
-        <h1>به سیستم عامل تحت وب HM خوش آمدید</h1>
-        <nav>
+    <div id="desktop">
+        <div id="taskbar">
+            <button id="start-menu-btn">منوی استارت</button>
+            <div id="clock"></div>
+        </div>
+
+        <div id="start-menu">
             <ul>
-                <li><a href="#">صفحه اصلی</a></li>
-                <li><a href="#">درباره ما</a></li>
-                <li><a href="#">تماس با ما</a></li>
+                <li onclick="openApp('file-manager')">📁 مدیریت فایل‌ها</li>
+                <li onclick="openApp('notepad')">📝 دفترچه یادداشت</li>
+                <li onclick="openApp('calculator')">🖩 ماشین‌حساب</li>
+                <li onclick="logout()">🚪 خروج</li>
             </ul>
-        </nav>
-    </header>
+        </div>
 
-    <section id="features">
-        <h2>ویژگی‌های سیستم‌عامل HM</h2>
-        <p>سیستم‌عامل HM امکاناتی همچون مدیریت فایل‌ها، پردازش‌های موازی، و ذخیره‌سازی ابری را برای کاربران فراهم می‌کند.</p>
-        <ul>
-            <li>مدیریت فایل‌ها به صورت آنلاین</li>
-            <li>پردازش موازی برای سرعت بیشتر</li>
-            <li>ذخیره‌سازی ابری و دسترسی آسان به داده‌ها</li>
-        </ul>
-    </section>
+        <div class="window" id="file-manager">
+            <div class="window-header">
+                <span>مدیریت فایل‌ها</span>
+                <button class="close-btn" onclick="closeWindow('file-manager')">✖</button>
+            </div>
+            <div class="window-content">
+                <input type="file" id="fileUpload">
+                <button onclick="uploadFile()">آپلود فایل</button>
+                <ul id="fileList"></ul>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 تمامی حقوق محفوظ است</p>
-    </footer>
-
-    <!-- فایل جاوااسکریپت -->
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
-
 </html>
