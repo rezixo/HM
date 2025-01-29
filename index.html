@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروش و دانلود سیستم‌عامل</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+        section {
+            padding: 60px 20px;
+        }
+        section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin: 20px;
+        }
+        button {
+            background: #f1c40f;
+            border: none;
+            padding: 15px 35px;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background: #d4ac0d;
+            transform: scale(1.05);
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>سیستم‌عامل اختصاصی</h1>
+        <nav>
+            <ul>
+                <li><a href="#download">دانلود</a></li>
+                <li><a href="#support">پشتیبانی</a></li>
+                <li><a href="#customization">سفارشی‌سازی</a></li>
+                <li><a href="#contact">تماس با ما</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="download">
+        <h2>دانلود رایگان سیستم‌عامل</h2>
+        <p>نسخه‌های مختلف سیستم‌عامل ما را به‌صورت رایگان دانلود کنید.</p>
+        <button onclick="window.location.href='download/os-latest.iso'">دانلود نسخه جدید</button>
+    </section>
+    
+    <section id="support">
+        <h2>خدمات پشتیبانی</h2>
+        <p>برای دریافت پشتیبانی فنی، لطفاً با ما در تماس باشید.</p>
+        <button onclick="window.location.href='support.html'">دریافت پشتیبانی</button>
+    </section>
+    
+    <section id="customization">
+        <h2>سفارشی‌سازی سیستم‌عامل</h2>
+        <p>درخواست سفارشی‌سازی سیستم‌عامل خود را ثبت کنید.</p>
+        <button onclick="window.location.href='customization.html'">ثبت درخواست</button>
+    </section>
+    
+    <footer>
+        <p>© 2025 تمامی حقوق محفوظ است.</p>
+    </footer>
+</body>
+</html>
