@@ -11,39 +11,24 @@ document.getElementById("start-menu-btn").addEventListener("click", function() {
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
 });
 
-function openApp(appId) {
-    document.getElementById(appId).style.display = "block";
-}
-
-function closeWindow(windowId) {
-    document.getElementById(windowId).style.display = "none";
-}
-
-function uploadFile() {
-    let fileInput = document.getElementById("fileUpload").files[0];
-    if (fileInput) {
-        let li = document.createElement("li");
-        li.innerText = fileInput.name;
-        document.getElementById("fileList").appendChild(li);
-    }
-}
-// 1. باز کردن و بستن برنامه‌ها
+// باز کردن و بستن برنامه‌ها
 function openApp(appId) {
     const app = document.getElementById(appId);
     if (!app) return;
 
     app.style.display = 'block';
     app.style.zIndex = 100;  // پنجره باز شده همیشه در بالای پنجره‌های دیگر قرار گیرد
+    app.classList.add('window-right');  // پنجره در سمت راست قرار می‌گیرد
 }
 
-function closeWindow(appId) {
-    const app = document.getElementById(appId);
+function closeWindow(windowId) {
+    const app = document.getElementById(windowId);
     if (app) {
         app.style.display = 'none';
     }
 }
 
-// 2. قابلیت Drag and Drop برای جابجایی پنجره‌ها
+// قابلیت Drag and Drop برای جابجایی پنجره‌ها
 function makeDraggable(elementId) {
     const elem = document.getElementById(elementId);
     let isDragging = false;
@@ -74,23 +59,8 @@ function makeDraggable(elementId) {
 
 makeDraggable('file-manager');  // پنجره مدیریت فایل‌ها را قابل جابجایی کنید
 
-// 3. تایمر و نمایش ساعت
-function startTimer() {
-    let time = 0;
-    const timerDisplay = document.getElementById("clock");
-
-    setInterval(() => {
-        time++;
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        timerDisplay.textContent = `${minutes}:${seconds}`;
-    }, 1000);
-}
-
-startTimer();  // شروع تایمر در منوی استارت
-
-// 4. آپلود و نمایش فایل‌ها
-function uploadFile() {
+// آپلود و نمایش فایل‌ها
+function uploadFileToLocal() {
     const fileInput = document.getElementById("fileUpload");
     const file = fileInput.files[0];
 
@@ -124,7 +94,6 @@ function displayFiles() {
 }
 
 function viewFile(file) {
-    // نمایش محتوای فایل
     alert(`محتوای فایل: ${file.content}`);
 }
 
@@ -137,67 +106,8 @@ function deleteFile(fileName) {
 
 displayFiles();  // نمایش فایل‌های ذخیره‌شده
 
-// 5. ایجاد پوشه‌ها و نمایش آن‌ها
-function createFolder(folderName) {
-    const folders = JSON.parse(localStorage.getItem("folders")) || [];
-    folders.push({ name: folderName, files: [] });
-    localStorage.setItem("folders", JSON.stringify(folders));
-    displayFolders();
-}
-
-function displayFolders() {
-    const folderList = document.getElementById("folderList");
-    const folders = JSON.parse(localStorage.getItem("folders")) || [];
-    folderList.innerHTML = '';
-
-    folders.forEach(folder => {
-        const li = document.createElement("li");
-        li.textContent = folder.name;
-        folderList.appendChild(li);
-    });
-}
-
-// 6. اضافه کردن ذخیره‌سازی ابری (برای مثال Google Drive API)
-function uploadToCloud() {
-    // این بخش به API ذخیره‌سازی ابری شما بستگی دارد
-    alert("امکانات ذخیره‌سازی ابری در حال حاضر غیرفعال است.");
-}
-
-// 7. رمزنگاری داده‌ها (برای امنیت بیشتر)
-function encryptData(data, key) {
-    return CryptoJS.AES.encrypt(data, key).toString();
-}
-
-function decryptData(encryptedData, key) {
-    const bytes = CryptoJS.AES.decrypt(encryptedData, key);
-    return bytes.toString(CryptoJS.enc.Utf8);
-}
-
-// 8. مدیریت چند پنجره (Multi-window)
-function openMultipleWindows() {
-    const windows = ['file-manager', 'notepad', 'calculator'];
-    windows.forEach(appId => {
-        openApp(appId);
-    });
-}
-
-document.getElementById("start-menu-btn").addEventListener('click', function() {
-    document.getElementById('start-menu').style.display = 'block';
-});
-
-document.getElementById("fileUpload").addEventListener('change', uploadFile);
-
-// 9. مدیریت سشن و خروج
+// مدیریت سشن و خروج
 function logout() {
-    // عملیات لازم برای خروج از سشن
     alert("شما از سیستم خارج شدید.");
 }
 
-function openApp(appId) {
-    const app = document.getElementById(appId);
-    if (!app) return;
-
-    app.style.display = 'block';
-    app.style.zIndex = 100;  // پنجره باز شده همیشه در بالای پنجره‌های دیگر قرار گیرد
-    app.classList.add('window-right');  // اضافه کردن کلاس برای قرار گرفتن پنجره در سمت راست
-}
