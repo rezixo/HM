@@ -1,115 +1,41 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم‌عامل تحت وب</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="سیستم‌عامل تحت وب HM | مدیریت فایل‌ها، اجرای برنامه‌های وب، ذخیره‌سازی ابری">
+    <meta name="robots" content="index, follow">
+    <title>سیستم‌عامل تحت وب HM</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/themes.css">
 </head>
 <body>
     <div id="desktop">
         <div id="taskbar">
-            <span id="clock"></span>
             <button id="start-menu-btn">منوی استارت</button>
-            <div id="notifications"></div>
+            <div id="clock"></div>
         </div>
-
         <div id="start-menu">
             <ul>
-                <li onclick="openApp('file-manager')">مدیریت فایل‌ها</li>
-                <li onclick="openApp('notepad')">دفترچه یادداشت</li>
-                <li onclick="openApp('calculator')">ماشین حساب</li>
-                <li onclick="openApp('video-call')">تماس تصویری</li>
-                <li onclick="openApp('voice-message')">پیام صوتی</li>
+                <li onclick="openApp('file-manager')">📁 مدیریت فایل‌ها</li>
+                <li onclick="openApp('notepad')">📝 دفترچه یادداشت</li>
+                <li onclick="openApp('calculator')">🖩 ماشین‌حساب</li>
+                <li onclick="logout()">🚪 خروج</li>
             </ul>
         </div>
-
-        <!-- پنجره‌ها -->
         <div class="window" id="file-manager">
             <div class="window-header">
                 <span>مدیریت فایل‌ها</span>
                 <button class="close-btn" onclick="closeWindow('file-manager')">✖</button>
             </div>
             <div class="window-content">
-                <h3>فایل‌ها</h3>
                 <input type="file" id="fileUpload">
+                <button onclick="uploadFile()">آپلود فایل</button>
                 <ul id="fileList"></ul>
             </div>
         </div>
-
-        <div class="window" id="notepad">
-            <div class="window-header">
-                <span>دفترچه یادداشت</span>
-                <button class="close-btn" onclick="closeWindow('notepad')">✖</button>
-            </div>
-            <div class="window-content">
-                <textarea id="noteArea"></textarea>
-            </div>
-        </div>
-
-        <div class="window" id="calculator">
-            <div class="window-header">
-                <span>ماشین حساب</span>
-                <button class="close-btn" onclick="closeWindow('calculator')">✖</button>
-            </div>
-            <div class="window-content">
-                <input type="text" id="calc-display" disabled>
-                <div id="calc-buttons">
-                    <button onclick="appendToCalcDisplay(7)">7</button>
-                    <button onclick="appendToCalcDisplay(8)">8</button>
-                    <button onclick="appendToCalcDisplay(9)">9</button>
-                    <button onclick="appendToCalcDisplay('+')">+</button>
-                    <button onclick="appendToCalcDisplay(4)">4</button>
-                    <button onclick="appendToCalcDisplay(5)">5</button>
-                    <button onclick="appendToCalcDisplay(6)">6</button>
-                    <button onclick="appendToCalcDisplay('-')">-</button>
-                    <button onclick="appendToCalcDisplay(1)">1</button>
-                    <button onclick="appendToCalcDisplay(2)">2</button>
-                    <button onclick="appendToCalcDisplay(3)">3</button>
-                    <button onclick="appendToCalcDisplay('*')">*</button>
-                    <button onclick="clearCalcDisplay()">C</button>
-                    <button onclick="appendToCalcDisplay(0)">0</button>
-                    <button onclick="calculateResult()">=</button>
-                    <button onclick="appendToCalcDisplay('/')">/</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="window" id="voice-message">
-            <div class="window-header">
-                <span>پیام صوتی</span>
-                <button class="close-btn" onclick="closeWindow('voice-message')">✖</button>
-            </div>
-            <div class="window-content">
-                <button onclick="startRecording()">شروع ضبط</button>
-                <button onclick="stopRecording()" id="stop-btn" disabled>توقف ضبط</button>
-                <audio id="audio-player" controls style="display:none;"></audio>
-            </div>
-        </div>
-
-        <div class="window" id="video-call">
-            <div class="window-header">
-                <span>تماس تصویری</span>
-                <button class="close-btn" onclick="closeWindow('video-call')">✖</button>
-            </div>
-            <div class="window-content">
-                <video id="user-video" width="100%" autoplay></video>
-                <video id="partner-video" width="100%" autoplay></video>
-                <button onclick="startVideoCall()">شروع تماس تصویری</button>
-            </div>
-        </div>
-
-        <div class="window" id="advanced-photo-gallery">
-            <div class="window-header">
-                <span>گالری تصاویر پیشرفته</span>
-                <button class="close-btn" onclick="closeWindow('advanced-photo-gallery')">✖</button>
-            </div>
-            <div class="window-content">
-                <div id="image-gallery"></div>
-            </div>
-        </div>
+        <!-- پنجره‌های دیگر هم در اینجا قرار خواهند گرفت -->
     </div>
-
-    <script src="script.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
