@@ -15,15 +15,21 @@
             <div id="clock"></div>
         </div>
 
+        <!-- منوی استارت -->
         <div id="start-menu">
             <ul>
                 <li onclick="openApp('file-manager')">📁 مدیریت فایل‌ها</li>
                 <li onclick="openApp('notepad')">📝 دفترچه یادداشت</li>
                 <li onclick="openApp('calculator')">🖩 ماشین‌حساب</li>
+                <li onclick="openApp('video-player')">🎬 پخش ویدئو</li>
+                <li onclick="openApp('email-client')">📧 مدیریت ایمیل</li>
+                <li onclick="openApp('task-manager')">📝 مدیریت وظایف</li>
+                <li onclick="openApp('photo-gallery')">🖼 گالری تصاویر</li>
                 <li onclick="logout()">🚪 خروج</li>
             </ul>
         </div>
 
+        <!-- پنجره‌های مختلف -->
         <div class="window" id="file-manager">
             <div class="window-header">
                 <span>مدیریت فایل‌ها</span>
@@ -31,12 +37,100 @@
             </div>
             <div class="window-content">
                 <input type="file" id="fileUpload">
-                <button onclick="uploadFileToLocal()">آپلود فایل</button>
+                <button onclick="uploadFile()">آپلود فایل</button>
                 <ul id="fileList"></ul>
+            </div>
+        </div>
+
+        <div class="window" id="notepad">
+            <div class="window-header">
+                <span>دفترچه یادداشت</span>
+                <button class="close-btn" onclick="closeWindow('notepad')">✖</button>
+            </div>
+            <div class="window-content">
+                <textarea id="noteText"></textarea>
+                <button onclick="saveNote()">ذخیره یادداشت</button>
+            </div>
+        </div>
+
+        <div class="window" id="calculator">
+            <div class="window-header">
+                <span>ماشین‌حساب</span>
+                <button class="close-btn" onclick="closeWindow('calculator')">✖</button>
+            </div>
+            <div class="window-content">
+                <input type="text" id="calculator-display" disabled>
+                <div>
+                    <button onclick="appendToDisplay(1)">1</button>
+                    <button onclick="appendToDisplay(2)">2</button>
+                    <button onclick="appendToDisplay(3)">3</button>
+                    <button onclick="appendToDisplay(4)">4</button>
+                    <button onclick="appendToDisplay(5)">5</button>
+                    <button onclick="appendToDisplay(6)">6</button>
+                    <button onclick="appendToDisplay(7)">7</button>
+                    <button onclick="appendToDisplay(8)">8</button>
+                    <button onclick="appendToDisplay(9)">9</button>
+                    <button onclick="appendToDisplay(0)">0</button>
+                    <button onclick="clearDisplay()">C</button>
+                    <button onclick="calculateResult()">=</button>
+                    <button onclick="appendToDisplay('+')">+</button>
+                    <button onclick="appendToDisplay('-')">-</button>
+                    <button onclick="appendToDisplay('*')">*</button>
+                    <button onclick="appendToDisplay('/')">/</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="video-player">
+            <div class="window-header">
+                <span>پخش ویدئو</span>
+                <button class="close-btn" onclick="closeWindow('video-player')">✖</button>
+            </div>
+            <div class="window-content">
+                <video width="100%" controls>
+                    <source src="video.mp4" type="video/mp4">
+                    مرورگر شما از تگ ویدئو پشتیبانی نمی‌کند.
+                </video>
+            </div>
+        </div>
+
+        <div class="window" id="email-client">
+            <div class="window-header">
+                <span>مدیریت ایمیل</span>
+                <button class="close-btn" onclick="closeWindow('email-client')">✖</button>
+            </div>
+            <div class="window-content">
+                <input type="text" id="email-to" placeholder="به">
+                <textarea id="email-body" placeholder="متن ایمیل"></textarea>
+                <button onclick="sendEmail()">ارسال ایمیل</button>
+            </div>
+        </div>
+
+        <div class="window" id="task-manager">
+            <div class="window-header">
+                <span>مدیریت وظایف</span>
+                <button class="close-btn" onclick="closeWindow('task-manager')">✖</button>
+            </div>
+            <div class="window-content">
+                <input type="text" id="task-input" placeholder="وظیفه جدید">
+                <button onclick="addTask()">اضافه کردن وظیفه</button>
+                <ul id="task-list"></ul>
+            </div>
+        </div>
+
+        <div class="window" id="photo-gallery">
+            <div class="window-header">
+                <span>گالری تصاویر</span>
+                <button class="close-btn" onclick="closeWindow('photo-gallery')">✖</button>
+            </div>
+            <div class="window-content">
+                <input type="file" id="imageUpload" accept="image/*">
+                <button onclick="uploadImage()">آپلود تصویر</button>
+                <div id="image-gallery"></div>
             </div>
         </div>
     </div>
 
-    <script src="scripts/script.js"></script>
+    <script src="assets/script.js"></script>
 </body>
 </html>
