@@ -22,6 +22,7 @@
     background-color: #fff;
     border: 1px solid #ccc;
     display: none;
+    width: 200px;  /* عرض منو استارت */
 }
 
 #start-menu ul {
@@ -44,7 +45,7 @@
     border: 1px solid #ccc;
     position: absolute;
     top: 100px;
-    left: 50px;
+    left: calc(100% - 350px);  /* تغییر به سمت راست صفحه */
     z-index: 10;
 }
 
@@ -57,4 +58,10 @@
 
 .window-content {
     padding: 20px;
+}
+
+/* افزودن کلاس برای برطرف کردن تداخل با منو */
+.window-right {
+    left: calc(100% - 350px);  /* قرار دادن پنجره در سمت راست */
+    top: 60px;  /* فاصله از بالا */
 }
