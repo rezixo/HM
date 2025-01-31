@@ -1,3 +1,4 @@
+// ساعت و منوی استارت
 function updateClock() {
     let now = new Date();
     let timeString = now.getHours() + ":" + now.getMinutes();
@@ -11,97 +12,127 @@ document.getElementById("start-menu-btn").addEventListener("click", function() {
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
 });
 
+// باز و بسته کردن پنجره‌ها
 function openApp(appId) {
     const app = document.getElementById(appId);
-    if (!app) return;
-
-    app.style.display = 'block';
-    app.style.zIndex = 100;  // پنجره باز شده همیشه در بالای پنجره‌های دیگر قرار گیرد
-    app.classList.add('window-right');
+    if (app) {
+        app.style.display = 'block';
+        app.style.zIndex = 100;
+    }
 }
 
-function closeWindow(windowId) {
-    const app = document.getElementById(windowId);
+function closeWindow(appId) {
+    const app = document.getElementById(appId);
     if (app) {
         app.style.display = 'none';
     }
 }
 
-function uploadFile() {
-    const fileInput = document.getElementById("fileUpload");
-    const file = fileInput.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const fileContent = e.target.result;
-            const fileName = file.name;
-            let files = JSON.parse(localStorage.getItem("files")) || [];
-            files.push({ name: fileName, content: fileContent });
-            localStorage.setItem("files", JSON.stringify(files));
-            displayFiles();
-        };
-        reader.readAsDataURL(file);
+// ضبط پیام صوتی
+let mediaRecorder;
+let audioChunks = [];
+
+function startRecording() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(function(stream) {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                document.getElementById('stop-btn').disabled = false;
+                mediaRecorder.ondataavailable = function(event) {
+                    audioChunks.push(event.data);
+                };
+            })
+            .catch(function(err) {
+                alert("خطا در دسترسی به میکروفون.");
+            });
     }
 }
 
-function displayFiles() {
-    const fileList = document.getElementById("fileList");
-    const files = JSON.parse(localStorage.getItem("files")) || [];
-    fileList.innerHTML = '';
+function stopRecording() {
+    mediaRecorder.stop();
+    document.getElementById('stop-btn').disabled = true;
 
-    files.forEach(file => {
-        const li = document.createElement("li");
-        li.textContent = file.name;
-        li.onclick = () => viewFile(file);
-        fileList.appendChild(li);
-    });
+    mediaRecorder.onstop = function() {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.style.display = 'block';
+        audioPlayer.src = audioUrl;
+        audioChunks = [];
+    };
 }
 
-function viewFile(file) {
-    alert(`محتوای فایل: ${file.content}`);
+// تماس تصویری
+let userStream;
+let partnerStream;
+
+function startVideoCall() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function(stream) {
+                userStream = stream;
+                const userVideo = document.getElementById('user-video');
+                userVideo.srcObject = stream;
+
+                partnerStream = stream; 
+                const partnerVideo = document.getElementById('partner-video');
+                partnerVideo.srcObject = partnerStream;
+            })
+            .catch(function(err) {
+                alert("خطا در دسترسی به وبکم یا میکروفون.");
+            });
+    }
 }
 
-function saveNote() {
-    const noteText = document.getElementById('noteText').value;
-    alert(`یادداشت ذخیره شد: ${noteText}`);
+// گالری تصاویر
+function displayImages() {
+    const imageGallery = document.getElementById('image-gallery');
+    const images = JSON.parse(localStorage.getItem("images")) || [];
+    imageGallery.innerHTML = '';
+
+    images.forEach(image => {
+        const imgElement = document.createElement('img');
+        imgElement.src = image.src;
+        imgElement.alt = image.name;
+        imgElement.onclick = function() {
+            showLargeImage(image.src);
+        };
+        imageGallery.appendChild(imgElement);
 }
 
-function appendToDisplay(value) {
-    document.getElementById('calculator-display').value += value;
-}
-
-function clearDisplay() {
-    document.getElementById('calculator-display').value = '';
-}
-
-function calculateResult() {
-    const display = document.getElementById('calculator-display');
-    display.value = eval(display.value);
-}
-
-function logout() {
-    alert("شما از سیستم خارج شدید.");
-}
-
-function addTask() {
-    const taskInput = document.getElementById("task-input");
-    const taskList = document.getElementById("task-list");
-    const li = document.createElement("li");
-    li.textContent = taskInput.value;
-    taskList.appendChild(li);
-    taskInput.value = '';
+function showLargeImage(src) {
+    const imgWindow = window.open("", "Image Viewer", "width=600,height=600");
+    imgWindow.document.write('<img src="' + src + '" style="width:100%;height:auto;">');
 }
 
 function uploadImage() {
-    const fileInput = document.getElementById("imageUpload");
+    const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            document.getElementById("image-gallery").appendChild(img);
+            const img = {
+                name: file.name,
+                src: e.target.result
+            };
+            let images = JSON.parse(localStorage.getItem("images")) || [];
+            images.push(img);
+            localStorage.setItem("images", JSON.stringify(images));
+            displayImages();
         };
         reader.readAsDataURL(file);
     }
 }
+
+// نوتیفیکیشن‌ها
+function sendNotification(message) {
+    const notificationList = document.getElementById('notification-list');
+    const notification = document.createElement('p');
+    notification.textContent = message;
+    notificationList.appendChild(notification);
+}
+
+setInterval(() => {
+    sendNotification("این یک نوتیفیکیشن آزمایشی است.");
+}, 5000);
