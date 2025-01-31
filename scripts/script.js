@@ -192,3 +192,12 @@ function logout() {
     // عملیات لازم برای خروج از سشن
     alert("شما از سیستم خارج شدید.");
 }
+
+function openApp(appId) {
+    const app = document.getElementById(appId);
+    if (!app) return;
+
+    app.style.display = 'block';
+    app.style.zIndex = 100;  // پنجره باز شده همیشه در بالای پنجره‌های دیگر قرار گیرد
+    app.classList.add('window-right');  // اضافه کردن کلاس برای قرار گرفتن پنجره در سمت راست
+}
