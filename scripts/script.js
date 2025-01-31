@@ -58,6 +58,8 @@ function makeDraggable(elementId) {
 }
 
 makeDraggable('file-manager');  // پنجره مدیریت فایل‌ها را قابل جابجایی کنید
+makeDraggable('calculator');  // پنجره ماشین حساب را قابل جابجایی کنید
+makeDraggable('notepad');  // پنجره دفترچه یادداشت را قابل جابجایی کنید
 
 // آپلود و نمایش فایل‌ها
 function uploadFileToLocal() {
@@ -110,4 +112,3 @@ displayFiles();  // نمایش فایل‌های ذخیره‌شده
 function logout() {
     alert("شما از سیستم خارج شدید.");
 }
-
