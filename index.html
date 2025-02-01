@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,28 +17,42 @@
         </div>
         <div id="start-menu">
             <ul>
-                <li onclick="openApp('file-manager')">File management</li>
-                <li onclick="openApp('ide')">IDE</li>
-
+                <li onclick="openApp('file-manager')">مدیریت فایل‌ها</li>
+                <li onclick="openApp('ide')">محیط توسعه</li>
+                <li onclick="openApp('live-stream')">پخش زنده</li>
             </ul>
         </div>
+
         <div class="window" id="file-manager">
             <div class="window-header">
-                <span>File management   </span>
+                <span>مدیریت فایل‌ها</span>
                 <button class="close-btn" onclick="closeWindow('file-manager')">✖</button>
             </div>
             <div class="window-content">
                 <input type="file" id="fileUpload">
-                <button onclick="uploadFile()">Upload File</button>
+                <button onclick="uploadFile()">آپلود فایل</button>
                 <ul id="fileList"></ul>
             </div>
         </div>
-        <!-- پنجره‌های دیگر هم در اینجا قرار خواهند گرفت -->
-        <video id="liveStream" autoplay muted></video>
-        <button onclick="startLiveStream()">شروع پخش زنده</button>
-        <button onclick="stopLiveStream()">پایان پخش زنده</button>        
-    </div>
 
+        <div class="window" id="live-stream">
+            <div class="window-header">
+                <span>پخش زنده</span>
+                <button class="close-btn" onclick="closeWindow('live-stream')">✖</button>
+            </div>
+            <div class="window-content">
+                <video id="liveStream" autoplay muted></video>
+                <button onclick="startLiveStream()">شروع پخش زنده</button>
+                <button onclick="stopLiveStream()">پایان پخش زنده</button>
+            </div>
+        </div>
+        
+        <h3>ویدئوهای ضبط‌شده</h3>
+        <div id="videoList"></div>
+    </div>
+    
     <script src="scripts/main.js"></script>
+    <script src="scripts/live.js"></script>
+    <script src="scripts/showVideos.js"></script>
 </body>
 </html>
