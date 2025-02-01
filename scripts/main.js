@@ -1,12 +1,23 @@
-// برای باز کردن و بستن پنجره‌ها
+// نمایش یا مخفی‌سازی منوی استارت
+document.getElementById("start-menu-btn").addEventListener('click', function() {
+    const startMenu = document.getElementById('start-menu');
+    if (startMenu.style.display === 'none' || startMenu.style.display === '') {
+        startMenu.style.display = 'block';
+    } else {
+        startMenu.style.display = 'none';
+    }
+});
+
+// باز کردن برنامه
 function openApp(appId) {
     const app = document.getElementById(appId);
     if (app) {
         app.style.display = 'block';
-        app.style.zIndex = 100;
+        app.style.zIndex = 100;  // پنجره باز شده همیشه در بالای پنجره‌های دیگر قرار گیرد
     }
 }
 
+// بستن برنامه
 function closeWindow(appId) {
     const app = document.getElementById(appId);
     if (app) {
@@ -14,26 +25,7 @@ function closeWindow(appId) {
     }
 }
 
-// برای ساعت
-function updateClock() {
-    let now = new Date();
-    let timeString = now.getHours() + ":" + now.getMinutes();
-    document.getElementById('clock').innerText = timeString;
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-// برای اپلیکیشن‌ها
-function uploadFile() {
-    let fileInput = document.getElementById("fileUpload").files[0];
-    if (fileInput) {
-        let li = document.createElement("li");
-        li.innerText = fileInput.name;
-        document.getElementById("fileList").appendChild(li);
-    }
-}
-
-// برای جابجایی پنجره‌ها
+// قابلیت جابجایی پنجره‌ها
 function makeDraggable(elementId) {
     const elem = document.getElementById(elementId);
     let isDragging = false;
@@ -62,4 +54,7 @@ function makeDraggable(elementId) {
     }
 }
 
+// اعمال قابلیت جابجایی به پنجره‌های برنامه‌ها
 makeDraggable('file-manager');
+makeDraggable('notepad');
+makeDraggable('calculator');
