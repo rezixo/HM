@@ -18,7 +18,8 @@
         <div id="start-menu">
             <ul>
                 <li onclick="openApp('file-manager')">File management</li>
-                <li onclick="openApp('file-manager')">IDE</li>
+                <li onclick="openApp('ide')">IDE</li>
+
             </ul>
         </div>
         <div class="window" id="file-manager">
@@ -33,6 +34,9 @@
             </div>
         </div>
         <!-- پنجره‌های دیگر هم در اینجا قرار خواهند گرفت -->
+        <video id="liveStream" autoplay muted></video>
+        <button onclick="startLiveStream()">شروع پخش زنده</button>
+        <button onclick="stopLiveStream()">پایان پخش زنده</button>        
     </div>
 
     <script src="scripts/main.js"></script>
