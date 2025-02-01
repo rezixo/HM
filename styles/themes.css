@@ -1,0 +1,10 @@
+/* استایل‌های تم‌های مختلف */
+.dark-theme {
+    background-color: #222;
+    color: white;
+}
+
+.light-theme {
+    background-color: #f5f5f5;
+    color: black;
+}
