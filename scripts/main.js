@@ -57,5 +57,3 @@ function makeDraggable(elementId) {
 // اعمال قابلیت جابجایی به پنجره‌های برنامه‌ها
 makeDraggable('file-manager');
 makeDraggable('ide');
-makeDraggable('live-stream');
-
